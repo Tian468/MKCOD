@@ -2,10 +2,6 @@ import numpy as np
 from sklearn.cluster import KMeans
 from scipy.spatial.distance import cdist
 
-import numpy as np
-from sklearn.cluster import KMeans
-from scipy.spatial.distance import cdist
-
 def mckod_score(H, alpha=0.75, eps=1e-6):
     """
     alpha: cumulative proportion threshold for large clusters
@@ -83,3 +79,4 @@ def mckod_score(H, alpha=0.75, eps=1e-6):
         ) *  rarity
 
     return score
+
