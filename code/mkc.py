@@ -49,25 +49,6 @@ def WithinClusterSS(K, H):
     """Calculate within-cluster sum of squares"""
     return np.trace(K) - np.trace(H.T @ K @ H)
 
-def BtwClusterSS(K, H):
-    """Calculate between-cluster sum of squares"""
-    return np.trace(H.T @ K @ H)
-
-def LabelToBinaryMat(x):
-    """
-    Convert cluster labels to binary indicator matrix
-    x: 1D array of cluster labels
-    return: n x c binary matrix
-    """
-    x = np.asarray(x).astype(str)
-    n = x.shape[0]
-    labels, counts = np.unique(x, return_counts=True)
-    K = len(labels)
-    res = np.zeros((n, K))
-    for lb, label in enumerate(labels):
-        res[x == label, lb] = 1 / np.sqrt(counts[lb])
-    return res
-
 def mkc(K, c, iter=10, epsilon = 1e-04, theta = None):
     assert c > 0 and int(c) == c, "Number of clusters must be positive integer"
     assert isinstance(K, np.ndarray) and K.ndim == 3, "K must be N x N x P 3D array"
@@ -131,5 +112,6 @@ def mkc(K, c, iter=10, epsilon = 1e-04, theta = None):
     state['H'] = H
     state['eigvecs'] = eigvecs
     state['eigvals'] = eigvals
+
 
     return state
